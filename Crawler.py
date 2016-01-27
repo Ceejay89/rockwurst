@@ -6,6 +6,7 @@ from Parser import HTMLPartsParser
 COST_REX = re.compile("title=\"([0-9]+[^\"]*)")
 IGN_REX  = re.compile("IGN: ([^< ]*)")
 NAME_REX = re.compile("view-thread\/[0-9]*[^>]*> *([^< ]*)")
+NAME_REX_CORRUPTED = re.compile("view-thread[^>]*>[^>]*>[^>]*>([^<]*)")
 
 
 def getRegexFromEntry(rex, entry):
@@ -18,7 +19,11 @@ def getIGNFromEntry(entry):
 	return getRegexFromEntry(IGN_REX, entry)
 
 def getItemNameFromEntry(entry):
-	return getRegexFromEntry(NAME_REX, entry)
+	ret = getRegexFromEntry(NAME_REX, entry)
+	if not ret:
+		ret = "Corrupted -> " + getRegexFromEntry(NAME_REX_CORRUPTED, entry)
+	return ret
+	
 	
 class ItemCrawler():
 

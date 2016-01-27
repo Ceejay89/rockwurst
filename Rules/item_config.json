@@ -1,21 +1,31 @@
 [
 	{
 		"Enabled" : true,
-		"Name" : "Empowered - Einfach so, online",
+		"Name" : "Empowered Corr - Einfach so, online",
 		"Link" : "mimkenakimoyor",
-		"Price": 25
+		"Price": 9,
+		"Alert": false
 	},
 	{
 		"Enabled" : true,
 		"Name" : "Enlighten - Einfach so, online",
 		"Link" : "okainhiritigor",
-		"Price": 8
+		"Price": 4,
+		"Alert": false
 	},
 	{
 		"Enabled" : true,
 		"Name" : "Enhance - Einfach so, online",
 		"Link" : "atokaronariria",
-		"Price": 2
+		"Price": 0.3,
+		"Alert": false
+	},
+	{
+		"Enabled" : true,
+		"Name" : "Pledge of Hands max Spell dmg",
+		"Link" : "mosisiyahukiti",
+		"Price": 50,
+		"Alert": true
 	}
 	
 ]
