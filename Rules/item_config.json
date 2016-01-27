@@ -1,0 +1,21 @@
+[
+	{
+		"Enabled" : true,
+		"Name" : "Empowered - Einfach so, online",
+		"Link" : "mimkenakimoyor",
+		"Price": 25
+	},
+	{
+		"Enabled" : true,
+		"Name" : "Enlighten - Einfach so, online",
+		"Link" : "okainhiritigor",
+		"Price": 8
+	},
+	{
+		"Enabled" : true,
+		"Name" : "Enhance - Einfach so, online",
+		"Link" : "atokaronariria",
+		"Price": 2
+	}
+	
+]

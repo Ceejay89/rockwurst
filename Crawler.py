@@ -1,24 +1,30 @@
 # coding=utf-8
-import urllib.request
-import urllib.error
-import http.cookiejar
-import ssl
-import os
-import re
-import sys
-import time
 import http.client, urllib.parse
+import re
 from Parser import HTMLPartsParser
 
-f = open("output.html", "w")
-err = open("not_working.txt", "w")
 COST_REX = re.compile("title=\"([0-9]+[^\"]*)")
 IGN_REX  = re.compile("IGN: ([^< ]*)")
+NAME_REX = re.compile("view-thread\/[0-9]*[^>]*> *([^< ]*)")
 
 
+def getRegexFromEntry(rex, entry):
+	return re.search(rex, entry).group(1)
 
-params = urllib.parse.urlencode({'bare': 'true', 'sort': 'price_in_chaos'})
-headers = {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8", 
+def getCostFromEntry(entry):
+	return getRegexFromEntry(COST_REX, entry)
+
+def getIGNFromEntry(entry):
+	return getRegexFromEntry(IGN_REX, entry)
+
+def getItemNameFromEntry(entry):
+	return getRegexFromEntry(NAME_REX, entry)
+	
+class ItemCrawler():
+
+	def __init__(self):
+		self.params = urllib.parse.urlencode({'bare': 'true', 'sort': 'price_in_chaos'})
+		self.headers = {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8", 
 			'Accept': '*/*',
 			'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
 			'Accept-Encoding': 'none',
@@ -29,24 +35,31 @@ headers = {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
 			"X-Requested-With" : "XMLHttpRequest",
 			"Cookie" : "_ga=GA1.2.1007963689.1453324732; league=Talisman",
 			"User-Agent" : "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0"}
-conn = http.client.HTTPConnection("poe.trade")
-
-conn.request("POST", "/search/yatammahasinos", params, headers)
-response = conn.getresponse().read().decode("utf-8", errors="ignore")
-
-parser = HTMLPartsParser("span", {"class" : ["requirements"]})
-parser.feed(response)
-cnt = 0
-for req in parser.matches:
-	ign = re.search(IGN_REX, req)
-	cost = re.search(COST_REX, req)
+		self.conn = http.client.HTTPConnection("poe.trade")
 	
-	if not ign or not cost:
-		err.write(req)
-	else:
-		cnt+=1
-		print("{} IGN : {}  cost: {}".format(cnt, ign.group(1), cost.group(1)))
+	def hits(self, url):
+		self.conn.request("POST", "/search/" + url, self.params, self.headers)
+		response = self.conn.getresponse().read().decode("utf-8", errors="ignore")
+
+		parser = HTMLPartsParser("tr", {"class" : ["first-line"]})
+		parser.feed(response)
+		
+		
+		return parser.matches
 	
-print(cnt)
-f.write("".join(parser.matches))
-f.close
+	def close(self):
+		self.conn.close()
+		
+		
+"""
+ic = ItemCrawler()
+matches = ic.requests("okainhiritigor")
+
+for match in matches:
+	print("IGN --> " + getIGNFromEntry(match) + " Cost --> " +  getCostFromEntry(match))
+
+matches = ic.requests("atokaronariria")
+
+for match in matches:
+	print("IGN --> " + getIGNFromEntry(match) + " Cost --> " +  getCostFromEntry(match))
+"""
