@@ -26,6 +26,27 @@
 		"Link" : "mosisiyahukiti",
 		"Price": 50,
 		"Alert": true
+	},
+	{
+		"Enabled" : true,
+		"Name"	: "Empowered lvl 3 Non-Corrupted",
+		"Link"	: "onatusamazukit",
+		"Price" : 212,
+		"Alert" : false
+	},
+	{
+		"Enabled" : true,
+		"Name"	: "Enlighten lvl 3 Non-Corrupted",
+		"Link"	: "moyasaritoruga",
+		"Price" : 166,
+		"Alert" : false
+	},
+	{
+		"Enabled" : true,
+		"Name"	: "Enlighten lvl 2 Non-Corrupted",
+		"Link"	: "nisakesoyeikoh",
+		"Price" : 27,
+		"Alert" : false
 	}
 	
 ]
