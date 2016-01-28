@@ -54,6 +54,8 @@ def start():
 
 
 if __name__ == "__main__":
+	Currency.updateCurrencys()
+	Currency.printCurrencys()
 	while True:
 		start()
 		time.sleep(60)

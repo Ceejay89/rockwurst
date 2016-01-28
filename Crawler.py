@@ -48,8 +48,7 @@ class ItemCrawler():
 
 		parser = HTMLPartsParser("tr", {"class" : ["first-line"]})
 		parser.feed(response)
-		
-		
+
 		return parser.matches
 	
 	def close(self):
