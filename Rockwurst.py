@@ -1,13 +1,10 @@
 import Currency
 import Crawler
-# import winsound
+import os
 import time
 import datetime
 from Crawler import ItemCrawler
 from ItemRules import RuleParser
-
-ALERT_FREQ = 500 #Hz
-ALERT_DUR  = 2000 #ms
 
 
 
@@ -37,8 +34,8 @@ def handleRule(rule):
 			print("\t[Rule] {}\r\n\t[Item] {}\r\n\t[Cost] {}\r\n\t[Chaos Value] {}".format(rule.name, item_name, cost, chaos_cost))
 			print("\t[Whisper] @{} Hi, I would like to buy your {} listed for {} in Talisman\n".format(ign, item_name, cost))
 			
-			# if rule.alert:
-				# winsound.Beep(ALERT_FREQ, ALERT_DUR)
+			if rule.alert:
+				os.system("start C:\\Users\\Ramon\\workspace\\git\\rockwurst\\testsound.mp3")
 
 			break
 
