@@ -38,6 +38,7 @@ def handleRule(rule):
 			print("\t[Whisper] @{} Hi, I would like to buy your {} listed for {} in Talisman\n".format(ign, item_name, cost))
 			
 			if rule.alert:
+				print("Hier ist ein Ton")
 				winsound.Beep(ALERT_FREQ, ALERT_DUR)
 			break
 
