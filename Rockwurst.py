@@ -1,6 +1,6 @@
 import Currency
 import Crawler
-import winsound
+# import winsound
 import time
 import datetime
 from Crawler import ItemCrawler
@@ -37,8 +37,8 @@ def handleRule(rule):
 			print("\t[Rule] {}\r\n\t[Item] {}\r\n\t[Cost] {}\r\n\t[Chaos Value] {}".format(rule.name, item_name, cost, chaos_cost))
 			print("\t[Whisper] @{} Hi, I would like to buy your {} listed for {} in Talisman\n".format(ign, item_name, cost))
 			
-			if rule.alert:
-				winsound.Beep(ALERT_FREQ, ALERT_DUR)
+			# if rule.alert:
+				# winsound.Beep(ALERT_FREQ, ALERT_DUR)
 			break
 
 def start():
