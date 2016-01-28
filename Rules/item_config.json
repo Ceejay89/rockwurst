@@ -3,21 +3,21 @@
 		"Enabled" : true,
 		"Name" : "Empower lvl 3 non-Corrupted",
 		"Link" : "okometamisinaz",
-		"Price": 166,
+		"Price": 140,
 		"Alert": false
 	},
 	{
 		"Enabled" : true,
 		"Name" : "Empower lvl 2 non-Corrupted",
 		"Link" : "tetinokimekeha",
-		"Price": 28,
+		"Price": 20,
 		"Alert": false
 	},
 	{
 		"Enabled" : true,
 		"Name" : "Empower lvl 1 non-Corrupted",
 		"Link" : "tutikomikusiha",
-		"Price": 10,
+		"Price": 6,
 		"Alert": false
 	},
 	{
@@ -31,14 +31,14 @@
 		"Enabled" : true,
 		"Name"	: "Enlighten lvl 3 Non-Corrupted",
 		"Link"	: "moyasaritoruga",
-		"Price" : 166,
+		"Price" : 150,
 		"Alert" : false
 	},
 	{
 		"Enabled" : true,
 		"Name"	: "Enlighten lvl 2 Non-Corrupted",
 		"Link"	: "nisakesoyeikoh",
-		"Price" : 27,
+		"Price" : 22,
 		"Alert" : false
 	},
 	{
@@ -59,7 +59,7 @@
 		"Enabled" : true,
 		"Name"	: "Enhance lvl 2 Non-Corrupted",
 		"Link"	: "umayetiokaroto",
-		"Price" : 10,
+		"Price" : 7,
 		"Alert" : false
 	},
 	{
@@ -100,7 +100,7 @@
 	{
 		"Enabled" : true,
 		"Name"	: "Void Battery",
-		"Link"	: "hatamamomatahu",
+		"Link"	: "ugahasiritahon",
 		"Price" : 332,
 		"Alert" : false
 	},
@@ -256,55 +256,55 @@
 		"Name"	: "DAGGERDANNY OHLOLOLOLOLOL DAGGER",
 		"Link"	: "hasoratudosaur",
 		"Price" : 8300,
-		"Alert" : true
+		"Alert" : false
 	},
 	{
 		"Enabled" : true,
 		"Name"	: "DAGGERDANNY OHLOLOLOLOLOL Shield",
 		"Link"	: "anokahatenugam",
 		"Price" : 830,
-		"Alert" : true
+		"Alert" : false
 	},
 	{
 		"Enabled" : true,
 		"Name"	: "Jewel Crit Life Resi Mana-Leech",
 		"Link"	: "hasamomauzimaz",
 		"Price" : 830,
-		"Alert" : true
+		"Alert" : false
 	},
 	{
 		"Enabled" : true,
 		"Name"	: "Jewel  Life Resi Crit-Multi Melee-Damage",
 		"Link"	: "aterigesahiyam",
 		"Price" : 830,
-		"Alert" : true
+		"Alert" : false
 	},
 	{
 		"Enabled" : true,
 		"Name"	: "Jewel  Life Crit Crit-Multi Melee-Damage",
 		"Link"	: "medizumakarawa",
 		"Price" : 830,
-		"Alert" : true
+		"Alert" : false
 	},
 	{
 		"Enabled" : true,
 		"Name"	: "Atziri's Acuity Vaal Gauntlets",
 		"Link"	: "bizunotoririki",
 		"Price" : 1660,
-		"Alert" : true
+		"Alert" : false
 	},
 	{
 		"Enabled" : true,
 		"Name"	: "Atziri's Acuity Vaal Gauntlets - Unidentified",
 		"Link"	: "bizunotoririki",
 		"Price" : 2490,
-		"Alert" : true
+		"Alert" : false
 	},
 	{
 		"Enabled" : true,
 		"Name"	: "Taste of Hate Sapphire Flask",
 		"Link"	: "usiyasihutawas",
 		"Price" : 166,
-		"Alert" : true
+		"Alert" : false
 	}
 ]
