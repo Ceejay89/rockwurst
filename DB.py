@@ -46,10 +46,10 @@ def insert_item(plink, pname):
 	print("Added: "+pname+"\nLink: "+plink)
 	connection.close()
 
-def insert_scan(purl,value,date):
+def insert_scan(purl,value):
 	connection = sqlite3.connect('example.db')
 	connection.execute("INSERT INTO scan (item_url,value,date) "
-		+"VALUES (?,?,?)",(purl,value,pname))
+		+"VALUES (?,?,datetime('now'))",(purl,value))
 	connection.commit()
 	connection.close()
 

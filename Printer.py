@@ -4,7 +4,7 @@ from colorama import Fore, Back, Style, init
 init()
 
 
-def Log(msg, info, info_color, lvl):
+def Log(msg, info, info_color = None, lvl = 0):
 	if info_color:
 		color = eval("Fore.{}".format(info_color.upper()))
 	else:
