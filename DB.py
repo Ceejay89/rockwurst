@@ -1,32 +1,6 @@
 import sqlite3
 from ItemRules import RuleParser
 
-# file = open("url_list.txt", "r")
-
-# connection = sqlite3.connect('example.db')
-# # connection.execute('DROP TABLE items')
-# connection.execute('''CREATE TABLE items
-#               (url text not null primary key, 
-#               name text)''')
-# # connection.execute('DROP TABLE scan')
-# connection.execute('''CREATE TABLE scan
-#              (ID INTEGER primary key AUTOINCREMENT, 
-#              item_url text not null,
-#              value float,
-#              date date,
-#              FOREIGN KEY(item_url) REFERENCES items(url))''')
-# connection.execute("INSERT INTO items VALUES ('mimkenakimoyor','Empowered Corr - Einfach so, online')")
-# connection.commit()
-# Insert a row of data
-# database.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
-
-# Save (commit) the changes
-# cursor = connection.cursor()
-# cursor.execute("SELECT * FROM items")
-# res = cursor.fetchone()
-# cursor.execute("SELECT * from scan")
-# print (cursor.fetchall())
-# connection.close()
 
 def check_url_is_inserted(purl):
 	connection = sqlite3.connect('example.db')
@@ -56,8 +30,13 @@ def insert_scan(purl,value):
 def get_avg_price(purl):
 	connection = sqlite3.connect('example.db')
 	cursor = connection.cursor()
-	cursor.execute("Select AVG(value) from scan where item_url=? group by item_url",(purl,))
-	res = cursor.fetchone()[0]
+	cursor.execute("SELECT COUNT(*) from scan where item_url=?",(purl,))
+	exist = cursor.fetchone()[0]
+	if exist >= 1:
+		cursor.execute("Select AVG(value) from scan where item_url=? group by item_url",(purl,))
+		res = cursor.fetchone()[0]
+	else:
+		res = 0
 	connection.close()
 	return res
 
@@ -77,6 +56,17 @@ def delete_old_scans(pdays):
 	connection.close()
 
 def update_items():
+	connection = sqlite3.connect('example.db')
+	connection.execute('''CREATE TABLE if not exists items
+              (url text not null primary key, 
+              name text)''')
+	connection.execute('''CREATE TABLE if not exists scan
+             (ID INTEGER primary key AUTOINCREMENT, 
+             item_url text not null,
+             value float,
+             date date,
+             FOREIGN KEY(item_url) REFERENCES items(url))''')
+	connection.close()
 	rp = RuleParser()
 	rules = rp.rules
 	for rule in rules:

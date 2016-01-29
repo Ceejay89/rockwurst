@@ -10,12 +10,13 @@ from ItemRules import RuleParser
 from colorama import Fore, Back
 
 LEAGUE			 = "Talisman"
-MAX_HITS_FOR_AVG = 10
+MAX_HITS_FOR_AVG = 5
+PRICE_MULTIPLICATOR = 0.5
 
 def handleRule(rule):
 	ic = ItemCrawler()
 	
-	Log("{} for less then {} Chaos".format(rule.name, rule.price),"CURRENT SCAN", "blue", 0)
+	Log("{} for less then {} Chaos".format(rule.name, (PRICE_MULTIPLICATOR*DB.get_avg_price(rule.link))),"CURRENT SCAN", "blue", 0)
 	
 	hits = ic.hits(rule.link)
 	
@@ -45,7 +46,8 @@ def handleRule(rule):
 			hitCnt += 1
 			
 		
-		if chaos_cost <= rule.price and isFirst:
+		# if chaos_cost <= rule.price and isFirst:
+		if chaos_cost <= (PRICE_MULTIPLICATOR*DB.get_avg_price(rule.link)):
 			Log("Schnappaaah : ", "INFO", "yellow", 0)
 			Log(rule.name, "RULE", None, 1)
 			Log(item_print, "ITEM", None, 1)

@@ -362,7 +362,13 @@
 		"Link"	: "omewoanaubotam",
 		"Price" : 80,
 		"Alert" : false
+	},
+	{
+		"Enabled" : true,
+		"Name"	: "Betty Dagger",
+		"Link"	: "omabetotakauhi",
+		"Price" : 810,
+		"Alert" : false
 	}
-	
 	
 ]
