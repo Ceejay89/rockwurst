@@ -4,11 +4,11 @@ from ItemRules import RuleParser
 # file = open("url_list.txt", "r")
 
 # connection = sqlite3.connect('example.db')
-# connection.execute('DROP TABLE items')
+# # connection.execute('DROP TABLE items')
 # connection.execute('''CREATE TABLE items
-#              (url text not null primary key, 
-#              name text)''')
-# connection.execute('DROP TABLE scan')
+#               (url text not null primary key, 
+#               name text)''')
+# # connection.execute('DROP TABLE scan')
 # connection.execute('''CREATE TABLE scan
 #              (ID INTEGER primary key AUTOINCREMENT, 
 #              item_url text not null,
@@ -56,7 +56,7 @@ def insert_scan(purl,value):
 def get_avg_price(purl):
 	connection = sqlite3.connect('example.db')
 	cursor = connection.cursor()
-	cursor.execute("Select AVG(value) where url=? group by url",(purl,))
+	cursor.execute("Select AVG(value)from scan where item_url=? group by item_url",(purl,))
 	res = cursor.fetchone()[0]
 	connection.close()
 	return res
