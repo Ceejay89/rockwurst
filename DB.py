@@ -56,7 +56,7 @@ def insert_scan(purl,value):
 def get_avg_price(purl):
 	connection = sqlite3.connect('example.db')
 	cursor = connection.cursor()
-	cursor.execute("Select AVG(value)from scan where item_url=? group by item_url",(purl,))
+	cursor.execute("Select AVG(value) from scan where item_url=? group by item_url",(purl,))
 	res = cursor.fetchone()[0]
 	connection.close()
 	return res
