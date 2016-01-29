@@ -1,11 +1,13 @@
 # coding=utf-8
 import http.client, urllib.parse
 import re
+from Printer import Log
+import codecs
 from Parser import HTMLPartsParser
 
 COST_REX = re.compile("title=\"([0-9]+[^\"]*)")
 IGN_REX  = re.compile("IGN: ([^< ]*)")
-NAME_REX = re.compile("view-thread\/[0-9]*[^>]*> *([^< ]*)")
+NAME_REX = re.compile("view-thread\/[0-9]*[^>]*> *([^<]*)")
 NAME_REX_CORRUPTED = re.compile("view-thread[^>]*>[^>]*>[^>]*>([^<]*)")
 
 
@@ -17,12 +19,17 @@ def getCostFromEntry(entry):
 
 def getIGNFromEntry(entry):
 	return getRegexFromEntry(IGN_REX, entry)
-
+	
+def replaceStuff(name):
+	if name:
+		udata = name
+	return name
+	
 def getItemNameFromEntry(entry):
-	ret = getRegexFromEntry(NAME_REX, entry)
+	ret = replaceStuff(getRegexFromEntry(NAME_REX, entry))
 	if not ret:
-		ret = "Corrupted -> " + getRegexFromEntry(NAME_REX_CORRUPTED, entry)
-	return ret
+		return (True, replaceStuff(getRegexFromEntry(NAME_REX_CORRUPTED, entry)))
+	return (False, ret)
 	
 	
 class ItemCrawler():
@@ -44,12 +51,14 @@ class ItemCrawler():
 	
 	def hits(self, url):
 		self.conn.request("POST", "/search/" + url, self.params, self.headers)
-		response = self.conn.getresponse().read().decode("utf-8", errors="ignore")
+		
+		response = self.conn.getresponse().read().decode("windows-1252", errors="ignore")
 
 		parser = HTMLPartsParser("tr", {"class" : ["first-line"]})
 		parser.feed(response)
 
 		return parser.matches
+	
 	
 	def close(self):
 		self.conn.close()

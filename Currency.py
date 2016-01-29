@@ -1,12 +1,12 @@
 import urllib.request
 from enum import Enum
 from Parser import HTMLPartsParser
+import Rockwurst
 
 # ERSETZT CURRENCY_VALUES WENNS AUTOMATISCH
 MAX_CURRENCY_ID   = 24
 CHAOS_CURRENCY_ID = 4
 MAX_CURRENCY_COUNT_FOR_AVG = 3
-LEAGUE = "Talisman"
 
 TRADE_URL = "http://currency.poe.trade/search?league={}&online=x&want={}&have={}"
 
@@ -107,7 +107,7 @@ def updateCurrency(currencyId):
 	
 	
 def getCurrencyHTML(currencyId):
-	response = urllib.request.urlopen(TRADE_URL.format(LEAGUE, currencyId, CHAOS_CURRENCY_ID))
+	response = urllib.request.urlopen(TRADE_URL.format(Rockwurst.LEAGUE, currencyId, CHAOS_CURRENCY_ID))
 	return response.read().decode("utf-8")
 	
 def printCurrencys():

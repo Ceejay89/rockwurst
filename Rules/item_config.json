@@ -306,5 +306,63 @@
 		"Link"	: "usiyasihutawas",
 		"Price" : 166,
 		"Alert" : false
+	},
+	{
+		"Enabled" : true,
+		"Name"	: "T10 Plateau Map",
+		"Link"	: "oubehitarimote",
+		"Price" : 4,
+		"Alert" : false
+	},
+	{
+		"Enabled" : true,
+		"Name"	: "T12 Shipyard Map",
+		"Link"	: "iwioahuatowoha",
+		"Price" : 14,
+		"Alert" : false
+	},
+	{
+		"Enabled" : true,
+		"Name"	: "T12 Arsenal Map",
+		"Link"	: "ebehikokihotak",
+		"Price" : 14,
+		"Alert" : false
+	},
+	{
+		"Enabled" : true,
+		"Name"	: "Brinerot Whalers Trapper Boots ",
+		"Link"	: "ironasikamitag",
+		"Price" : 430,
+		"Alert" : false
+	},
+	{
+		"Enabled" : true,
+		"Name"	: "Kazimbo Helm",
+		"Link"	: "amekoyokezutuu",
+		"Price" : 1000,
+		"Alert" : false
+	},
+	{
+		"Enabled" : true,
+		"Name"	: "Kazimbo Amulet",
+		"Link"	: "oamikikubateko",
+		"Price" : 1000,
+		"Alert" : false
+	},
+	{
+		"Enabled" : true,
+		"Name"	: "Kazimbo Ringe",
+		"Link"	: "sasamenobeomam",
+		"Price" : 1000,
+		"Alert" : false
+	},
+	{
+		"Enabled" : true,
+		"Name"	: "Kazimbo Gürtel",
+		"Link"	: "omewoanaubotam",
+		"Price" : 80,
+		"Alert" : false
 	}
+	
+	
 ]
