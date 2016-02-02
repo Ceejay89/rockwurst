@@ -11,12 +11,15 @@ from colorama import Fore, Back
 
 LEAGUE			 = "Talisman"
 MAX_HITS_FOR_AVG = 5
-PRICE_MULTIPLICATOR = 0.5
+PRICE_MULTIPLICATOR = 0.7
+PRICE_IGNORE_MIN = 0.1
+PRICE_IGNORE_MAX = 5
 
 def handleRule(rule):
 	ic = ItemCrawler()
+	db_avg_cost = DB.get_avg_price(rule.link)
 	
-	Log("{} for less then {} Chaos".format(rule.name, (PRICE_MULTIPLICATOR*DB.get_avg_price(rule.link))),"CURRENT SCAN", "blue", 0)
+	Log("{} for less then {} Chaos".format(rule.name, (PRICE_MULTIPLICATOR*db_avg_cost)),"CURRENT SCAN", "blue", 0)
 	
 	hits = ic.hits(rule.link)
 	
@@ -41,13 +44,24 @@ def handleRule(rule):
 				item_print = Fore.RED + "Corrupted" + Fore.RESET + " " + item_name
 				
 		chaos_cost = Currency.getChaosValue(cost)
+		
+		# Solange noch kein Item gefunden wurde ist db_avg_cost = 0 und db_avg_cost * PRICE_IGNORE_MIN ebenfalls. 
+		# Das gleiche gilt für PRICE_IGNORE_MAX
+		if not db_avg_cost:
+			db_avg_cost = chaos_cost
+			
+		if chaos_cost < db_avg_cost * PRICE_IGNORE_MIN or chaos_cost > db_avg_cost * PRICE_IGNORE_MAX:
+			Log("Someone is selling {} ({}) for {} chaos!!".format(item_print, rule.link, chaos_cost), 
+				"TROLL ALERT", "red", 0)
+			continue
+		
 		if(hitCnt < MAX_HITS_FOR_AVG):
 			hitSum += chaos_cost
 			hitCnt += 1
 			
 		
 		# if chaos_cost <= rule.price and isFirst:
-		if chaos_cost <= (PRICE_MULTIPLICATOR*DB.get_avg_price(rule.link)):
+		if chaos_cost <= (PRICE_MULTIPLICATOR*db_avg_cost):
 			Log("Schnappaaah : ", "INFO", "yellow", 0)
 			Log(rule.name, "RULE", None, 1)
 			Log(item_print, "ITEM", None, 1)
@@ -63,6 +77,7 @@ def handleRule(rule):
 	if len(hits) > 0:
 		hitAvg = hitSum / hitCnt
 		Log("took the first {} items with an avarage of {} chaos".format(hitCnt, hitAvg), "SCAN RESULT", "white", 0)
+		
 		DB.insert_scan(rule.link, hitAvg)
 
 def start():

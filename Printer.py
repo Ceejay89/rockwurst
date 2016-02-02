@@ -8,7 +8,7 @@ def Log(msg, info, info_color = None, lvl = 0):
 	if info_color:
 		color = eval("Fore.{}".format(info_color.upper()))
 	else:
-		color = ""
+		color = Fore.GREEN
 		
 	offset = ""
 	
