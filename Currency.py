@@ -1,4 +1,5 @@
 import urllib.request
+import json
 from enum import Enum
 from Parser import HTMLPartsParser
 import Rockwurst
@@ -7,6 +8,8 @@ import Rockwurst
 MAX_CURRENCY_ID   = 24
 CHAOS_CURRENCY_ID = 4
 MAX_CURRENCY_COUNT_FOR_AVG = 3
+
+TRADE_URL_NINJA = "http://poeninja.azureedge.net/api/Data/GetCurrencyOverview?league={}"
 
 TRADE_URL = "http://currency.poe.trade/search?league={}&online=x&want={}&have={}"
 
@@ -22,6 +25,9 @@ def getChaosValue(raw):
 
 	return None
 
+def getChaosValueNinja(raw):
+	parts = raw.split(" ")
+	
 class Currency(Enum):
 	alteration		= 1
 	fusing 			= 2
@@ -81,12 +87,41 @@ CURRENCYS = {
 
 
 def updateCurrencys():
+	updateNinjaCurrency()
+	"""
 	for i in range(1, MAX_CURRENCY_ID):
 		if i == CHAOS_CURRENCY_ID:
 			continue
 		
 		updateCurrency(i)
+	"""	
+		
+def updateNinjaCurrency():
+	response = urllib.request.urlopen(TRADE_URL_NINJA.format(Rockwurst.LEAGUE))
+	html = response.read().decode("utf-8")
 	
+	jsonObj = json.loads(html)
+	
+	currentDetails = jsonObj["currencyDetails"]
+	items = jsonObj["lines"]
+	
+	formattedInfo = {}
+	
+	for detail in currentDetails:
+		formattedInfo[detail["id"]] = detail
+	
+	
+	for item in items:
+		if item["pay"] is not None:
+			detailStruct = formattedInfo[item["pay"]["payCurrencyId"]]
+			if detailStruct["poeTradeId"] <= 25 and "chaosEquivalent" in item:
+				CURRENCYS[Currency(detailStruct["poeTradeId"])] = item["chaosEquivalent"]
+		elif item["receive"] is not None:
+			detailStruct = formattedInfo[item["receive"]["getCurrencyId"]]
+			if detailStruct["poeTradeId"] <= 25 and "chaosEquivalent" in item:
+				CURRENCYS[Currency(detailStruct["poeTradeId"])] = item["chaosEquivalent"]
+				
+	print(CURRENCYS)
 def updateCurrency(currencyId):
 	html = getCurrencyHTML(currencyId)
 	
