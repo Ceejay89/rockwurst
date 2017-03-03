@@ -9,16 +9,28 @@ from Crawler import ItemCrawler
 from ItemRules import RuleParser
 from colorama import Fore, Back
 
-LEAGUE			 = "Talisman"
+from pygame import mixer
+
+LEAGUE			 = "Standard"
+
+# Die obersten MAX_HITS_FOR_AVG treffer bilden den Durchschnittswert
 MAX_HITS_FOR_AVG = 5
-PRICE_MULTIPLICATOR = 0.7
+
+# Multiplikator für ein Schnäpchen
+PRICE_MULTIPLICATOR = 1
+
+# Fake Angebote ausschließen, alles was unter PRICE_IGNORE_MIN und über PRICE_IGNORE_MAX liegt wird als fake angesehen
 PRICE_IGNORE_MIN = 0.1
 PRICE_IGNORE_MAX = 5
+
+
+mixer.init()
+mixer.music.load("testsound.mp3")
 
 def handleRule(rule):
 	ic = ItemCrawler()
 	db_avg_cost = DB.get_avg_price(rule.link)
-	
+
 	Log("{} for less then {} Chaos".format(rule.name, (PRICE_MULTIPLICATOR*db_avg_cost)),"CURRENT SCAN", "blue", 0)
 	
 	hits = ic.hits(rule.link)
@@ -32,6 +44,8 @@ def handleRule(rule):
 	for hit in hits:
 		
 		cost = Crawler.getCostFromEntry(hit)
+		if cost is None:
+			continue
 		ign  = Crawler.getIGNFromEntry(hit)
 		(corrupted, item_name) = Crawler.getItemNameFromEntry(hit)
 		
@@ -71,7 +85,7 @@ def handleRule(rule):
 			Log("@{} Hi, I would like to buy your {} listed for {} in {}\n".format(ign, item_name, cost, LEAGUE), "WHISPER", None, 1)
 			
 			if rule.alert:
-				os.system("start C:\\Users\\Ramon\\workspace\\git\\rockwurst\\testsound.mp3")
+				mixer.music.play()
 
 			isFirst = False
 	if len(hits) > 0:

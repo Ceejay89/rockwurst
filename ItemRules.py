@@ -15,7 +15,6 @@ class RuleParser():
 		
 		for ruleInfo in json.loads(fh.read()):
 			self.rules.append(Rule(ruleInfo))
-			
 		fh.close()
 		
 
@@ -26,3 +25,9 @@ class Rule():
 		self.link	 = info["Link"]
 		self.price	 = info["Price"]
 		self.alert	 = info["Alert"]
+	
+	def __str__(self):
+		return "Rule: [enabled : {}, name : {}, link : {}, price : {}, alert : {}]".format(self.enabled, self.name, self.link, self.price, self.alert)
+			
+	def __repr__(self):
+		return self.__str__()

@@ -50,6 +50,7 @@ class Currency(Enum):
 	ethernal		= 25
 	
 	
+	
 CURRENCYS = {
 		Currency.alteration : 0.0,
 		Currency.fusing		: 0.0,
@@ -75,7 +76,7 @@ CURRENCYS = {
 		Currency.transmutty	: 0.0,
 		Currency.augmentation	: 0.0,
 		Currency.mirror		: 10000,
-		Currency.ethernal	: 1000
+		Currency.ethernal	: 10000
 }
 
 
